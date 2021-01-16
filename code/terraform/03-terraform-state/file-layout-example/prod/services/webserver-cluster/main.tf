@@ -4,7 +4,7 @@ terraform {
   backend "s3" {
     # Replace this with your bucket name!
     bucket = "ulny-s3"
-    key    = "stage/services/webserver-cluster/terraform.tfstate"
+    key    = "prod/services/webserver-cluster/terraform.tfstate"
     region = "us-east-2"
 
     # Replace this with your DynamoDB table name!
@@ -20,13 +20,12 @@ provider "aws" {
   version = "~> 2.0"
 }
 module "webserver_cluster" {
-
   source = "../../../modules/services/webserver-cluster"
 
-  cluster_name           = var.cluster_name
-  db_remote_state_bucket = var.db_remote_state_bucket
-  db_remote_state_key    = var.db_remote_state_key
-  instance_type          = var.instance_type
-  min_size               = var.min_size
-  max_size               = var.max_size
+  cluster_name           = "webservers-prod"
+  db_remote_state_bucket = "ulny-s3"
+  db_remote_state_key    = "prod/data-stores/mysql/terraform.tfstate"
+  instance_type          = "t2.micro"
+  min_size               = 3
+  max_size               = 10
 }
