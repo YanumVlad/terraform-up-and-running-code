@@ -3,12 +3,10 @@ terraform {
   required_version = ">= 0.12, <= 0.13"
 
   backend "s3" {
-    # Replace this with your bucket name!
     bucket = "ulny-s3"
     key    = "stage/data-stores/mysql/terraform.tfstate"
     region = "us-east-2"
 
-    # Replace this with your DynamoDB table name!
     dynamodb_table = "dynamo-lock-table"
     encrypt        = true
   }
@@ -20,17 +18,11 @@ provider "aws" {
   version = "~> 2.0"
 }
 
-resource "aws_db_instance" "example" {
-  identifier_prefix = "terraform-up-and-running"
-  engine            = "mysql"
-  allocated_storage = 10
-  instance_class    = "db.t2.micro"
+module "mysql" {
 
-  username = "admin"
+  source = "../../../modules/data-stores/mysql"
 
-  name                = var.db_name
-  skip_final_snapshot = true
-
-  password = var.db_password
+  instance_name = var.cluster_name
+  db_name       = var.db_name
+  db_password   = var.db_password
 }
-

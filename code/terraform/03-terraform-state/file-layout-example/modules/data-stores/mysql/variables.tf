@@ -8,11 +8,11 @@ variable "db_password" {
   type        = string
 }
 
-variable "cluster_name" {
-  description = "The name of the environment"
+variable "instance_name" {
+  description = "The name to use for the database instance"
   type        = string
+  default     = "example_database_stage"
 }
-
 # ---------------------------------------------------------------------------------------------------------------------
 # OPTIONAL PARAMETERS
 # These parameters have reasonable defaults.

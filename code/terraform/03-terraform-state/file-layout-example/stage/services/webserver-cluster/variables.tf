@@ -14,7 +14,7 @@ variable "db_remote_state_key" {
 }
 
 variable "cluster_name" {
-  description = "The name of the ALB"
+  description = "The name of the environment"
   type        = string
 }
 
