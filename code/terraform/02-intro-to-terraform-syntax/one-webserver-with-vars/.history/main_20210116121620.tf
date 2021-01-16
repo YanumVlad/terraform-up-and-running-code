@@ -28,9 +28,9 @@ resource "aws_launch_configuration" "example" {
               nohup busybox httpd -f -p ${var.server_port} &
               EOF
 
-  /*   tags = {
+  tags = {
     Name = "terraform-example"
-  } */
+  }
 }
 
 
@@ -128,26 +128,5 @@ resource "aws_lb_target_group" "asg" {
     timeout             = 3
     healthy_threshold   = 2
     unhealthy_threshold = 2
-  }
-}
-
-resource "aws_lb_listener_rule" "asg" {
-  listener_arn = aws_lb_listener.http.arn
-  priority     = 100
-
-  /*   condition {
-    field  = "path-pattern"
-    values = ["*"]
-  } */
-
-  condition {
-    path_pattern {
-      values = ["*"]
-    }
-  }
-
-  action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.asg.arn
   }
 }

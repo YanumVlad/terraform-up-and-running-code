@@ -56,7 +56,7 @@ resource "aws_autoscaling_group" "example" {
   }
 
 }
-resource "aws_security_group" "instance" {
+/* resource "aws_security_group" "instance" {
 
   name = var.security_group_name
 
@@ -66,7 +66,7 @@ resource "aws_security_group" "instance" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-}
+} */
 
 resource "aws_lb" "example" {
   name               = "terraform-asg-example"
