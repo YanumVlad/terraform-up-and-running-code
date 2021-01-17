@@ -29,6 +29,7 @@ module "webserver_cluster" {
   instance_type          = var.instance_type
   min_size               = var.min_size
   max_size               = var.max_size
+  enable_autoscaling     = true
 
   custom_tags = {
     Owner      = "team-foo"
@@ -36,22 +37,3 @@ module "webserver_cluster" {
   }
 }
 
-resource "aws_autoscaling_schedule" "scale_out_during_business_hours" {
-  scheduled_action_name = "scale-out-during-business-hours"
-  min_size              = var.min_size
-  max_size              = var.max_size
-  desired_capacity      = var.max_size
-  recurrence            = "0 9 * * *"
-
-  autoscaling_group_name = module.webserver_cluster.asg_name
-}
-
-resource "aws_autoscaling_schedule" "scale_in_at_night" {
-  scheduled_action_name = "scale-in-at-night"
-  min_size              = var.min_size
-  max_size              = var.max_size
-  desired_capacity      = var.min_size
-  recurrence            = "0 17 * * *"
-
-  autoscaling_group_name = module.webserver_cluster.asg_name
-}
