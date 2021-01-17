@@ -31,6 +31,19 @@ variable "max_size" {
   description = "The maximum number of EC2 Instances in the ASG"
   type        = number
 }
+variable "enable_autoscaling" {
+  description = "If set to true, enable auto scaling"
+  type        = bool
+}
+
+variable "give_neo_cloudwatch_full_access" {
+  description = "If true, neo gets full access to CloudWatch"
+  type        = bool
+}
+variable "enable_new_user_data" {
+  description = "If set to true, use the new User Data script"
+  type        = bool
+}
 
 # ---------------------------------------------------------------------------------------------------------------------
 # OPTIONAL PARAMETERS
@@ -46,14 +59,4 @@ variable "custom_tags" {
   description = "Custom tags to set on the Instances in the ASG"
   type        = map(string)
   default     = {}
-}
-
-variable "enable_autoscaling" {
-  description = "If set to true, enable auto scaling"
-  type        = bool
-}
-
-variable "give_neo_cloudwatch_full_access" {
-  description = "If true, neo gets full access to CloudWatch"
-  type        = bool
 }

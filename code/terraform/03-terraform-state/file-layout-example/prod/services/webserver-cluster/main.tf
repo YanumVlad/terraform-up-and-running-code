@@ -23,13 +23,16 @@ module "webserver_cluster" {
 
   source = "../../../modules/services/webserver-cluster"
 
-  cluster_name           = var.cluster_name
-  db_remote_state_bucket = var.db_remote_state_bucket
-  db_remote_state_key    = var.db_remote_state_key
-  instance_type          = var.instance_type
-  min_size               = var.min_size
-  max_size               = var.max_size
-  enable_autoscaling     = true
+  cluster_name                    = var.cluster_name
+  db_remote_state_bucket          = var.db_remote_state_bucket
+  db_remote_state_key             = var.db_remote_state_key
+  instance_type                   = var.instance_type
+  min_size                        = var.min_size
+  max_size                        = var.max_size
+  enable_autoscaling              = true
+  enable_new_user_data            = false
+  give_neo_cloudwatch_full_access = false
+
 
   custom_tags = {
     Owner      = "team-foo"

@@ -23,13 +23,16 @@ module "webserver_cluster" {
 
   source = "../../../modules/services/webserver-cluster"
 
-  cluster_name           = var.cluster_name
-  db_remote_state_bucket = var.db_remote_state_bucket
-  db_remote_state_key    = var.db_remote_state_key
-  instance_type          = var.instance_type
-  min_size               = var.min_size
-  max_size               = var.max_size
-  enable_autoscaling     = false
+  cluster_name                    = var.cluster_name
+  db_remote_state_bucket          = var.db_remote_state_bucket
+  db_remote_state_key             = var.db_remote_state_key
+  instance_type                   = var.instance_type
+  min_size                        = var.min_size
+  max_size                        = var.max_size
+  enable_autoscaling              = false
+  enable_new_user_data            = true
+  give_neo_cloudwatch_full_access = true
+
 
   custom_tags = {
     Owner       = "team-foo"
@@ -73,4 +76,13 @@ output "for_directive" {
   ${name}
 %{~endfor}
 EOF
+}
+
+variable "name" {
+  description = "A name to render"
+  type        = string
+}
+
+output "if_else_directive" {
+  value = "Hello, %{if var.name != ""}${var.name}%{else}(unnamed)%{endif}"
 }
