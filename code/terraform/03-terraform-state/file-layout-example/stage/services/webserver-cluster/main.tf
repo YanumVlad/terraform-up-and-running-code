@@ -29,8 +29,10 @@ module "webserver_cluster" {
   instance_type          = var.instance_type
   min_size               = var.min_size
   max_size               = var.max_size
-}
 
-module test-git {
-  source = "github.com/brikis98/terraform-up-and-running-code//code/terraform/04-terraform-module/module-example/modules/services/webserver-cluster?ref=v0.1.0"
+  custom_tags = {
+    Owner       = "team-foo"
+    DeployedBy  = "terraform"
+    Environment = "staging"
+  }
 }

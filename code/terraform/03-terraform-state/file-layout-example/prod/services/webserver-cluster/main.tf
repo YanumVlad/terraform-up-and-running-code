@@ -29,6 +29,11 @@ module "webserver_cluster" {
   instance_type          = var.instance_type
   min_size               = var.min_size
   max_size               = var.max_size
+
+  custom_tags = {
+    Owner      = "team-foo"
+    DeployedBy = "terraform"
+  }
 }
 
 resource "aws_autoscaling_schedule" "scale_out_during_business_hours" {
