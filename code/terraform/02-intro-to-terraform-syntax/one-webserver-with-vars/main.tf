@@ -1,5 +1,16 @@
 terraform {
   required_version = ">= 0.12, <= 0.13"
+
+  backend "s3" {
+    # Replace this with your bucket name!
+    bucket = "ulny-s3"
+    key    = "global/s3/terraform.tfstate"
+    region = "us-east-2"
+
+    # Replace this with your DynamoDB table name!
+    dynamodb_table = "dynamo-lock-table"
+    encrypt        = true
+  }
 }
 
 provider "aws" {
