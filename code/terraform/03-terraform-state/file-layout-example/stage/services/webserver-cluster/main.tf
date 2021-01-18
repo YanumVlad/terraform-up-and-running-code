@@ -32,7 +32,7 @@ module "webserver_cluster" {
   enable_autoscaling              = false
   give_neo_cloudwatch_full_access = true
   ami                             = "ami-0c55b159cbfafe1f0"
-  server_text                     = "New server text"
+  server_text                     = "New server text IIHF"
 
 
   custom_tags = {
