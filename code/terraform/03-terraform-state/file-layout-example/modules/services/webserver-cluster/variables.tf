@@ -40,11 +40,6 @@ variable "give_neo_cloudwatch_full_access" {
   description = "If true, neo gets full access to CloudWatch"
   type        = bool
 }
-variable "enable_new_user_data" {
-  description = "If set to true, use the new User Data script"
-  type        = bool
-}
-
 # ---------------------------------------------------------------------------------------------------------------------
 # OPTIONAL PARAMETERS
 # These parameters have reasonable defaults.
@@ -55,8 +50,21 @@ variable "server_port" {
   type        = number
   default     = 8080
 }
+
+variable "ami" {
+  description = "The AMI to run in the cluster"
+  default     = "ami-0c55b159cbfafe1f0"
+  type        = string
+}
+
+variable "server_text" {
+  description = "The text the web server should return"
+  default     = "Hello, World"
+  type        = string
+}
 variable "custom_tags" {
   description = "Custom tags to set on the Instances in the ASG"
   type        = map(string)
   default     = {}
 }
+
