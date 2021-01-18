@@ -87,3 +87,9 @@ EOF
 # output "if_else_directive" {
 #   value = "Hello, %{if var.name != ""}${var.name}%{else}(unnamed)%{endif}"
 # }
+
+resource "aws_iam_user" "existing_user" {
+  # You should change this to the username of an IAM user that already
+  # exists so you can practice using the terraform import command
+  name = "developer1"
+}
