@@ -6,15 +6,15 @@ provider "aws" {
 }
 
 module "hello_world_app" {
-  source = "github.com/YanumVlad/terraform-modules.git//modules/services/hello-world-app?ref=v0.0.5"
+  source = "github.com/YanumVlad/terraform-modules.git//modules/services/hello-world-app?ref=v0.0.7"
 
-  server_text = "New server text"
-  environment = "stage"
-  bucket      = "ulny-s3"
-  key         = "stage/services/webserver-cluster/terraform.tfstate"
+  server_text            = "New server text"
+  environment            = "stage"
+  db_remote_state_bucket = "ulny-s3"
+  db_remote_state_key    = "stage/data-stores/mysql/terraform.tfstate"
+  enable_autoscaling     = true
 
-  instance_type      = "t2.micro"
-  min_size           = 2
-  max_size           = 2
-  enable_autoscaling = false
+  instance_type = "t2.micro"
+  min_size      = 2
+  max_size      = 2
 }
