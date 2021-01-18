@@ -30,8 +30,9 @@ module "webserver_cluster" {
   min_size                        = var.min_size
   max_size                        = var.max_size
   enable_autoscaling              = false
-  enable_new_user_data            = true
   give_neo_cloudwatch_full_access = true
+  ami                             = "ami-0c55b159cbfafe1f0"
+  server_text                     = "New server text"
 
 
   custom_tags = {
@@ -78,11 +79,11 @@ output "for_directive" {
 EOF
 }
 
-variable "name" {
-  description = "A name to render"
-  type        = string
-}
+# variable "name" {
+#   description = "A name to render"
+#   type        = string
+# }
 
-output "if_else_directive" {
-  value = "Hello, %{if var.name != ""}${var.name}%{else}(unnamed)%{endif}"
-}
+# output "if_else_directive" {
+#   value = "Hello, %{if var.name != ""}${var.name}%{else}(unnamed)%{endif}"
+# }
