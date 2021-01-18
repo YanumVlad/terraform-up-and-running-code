@@ -4,6 +4,6 @@ output "asg_name" {
 }
 
 output "instance_security_group_id" {
-  value       = aws_security_group.instance.id
+  value       = aws_security_group.cluster_instance.id
   description = "The ID of the EC2 Instance Security Group"
 }
