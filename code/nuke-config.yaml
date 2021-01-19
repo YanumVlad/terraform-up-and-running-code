@@ -1,5 +1,5 @@
 regions:
-        - eu-west-1
+        - us-east-2
         - global
 
 account-blacklist:
@@ -11,9 +11,9 @@ accounts:
 resource-types:
   # only nuke these resources
         targets:
-        - AutoScalingGroup
-        - ECSInstance
-        - RDSInstance
-        - ELB
-        - ELBv2
-        - ELBv2TargetGroup          
+                - AutoScalingGroup
+                - ECSInstance
+                #- RDSInstance
+                - ELB
+                - ELBv2
+                - ELBv2TargetGroup          
