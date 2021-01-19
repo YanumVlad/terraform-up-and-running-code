@@ -1,0 +1,19 @@
+regions:
+        - eu-west-1
+        - global
+
+account-blacklist:
+        - "999999999999" # production
+
+accounts:
+          "948804833228": {} # aws-nuke-example
+
+resource-types:
+  # only nuke these resources
+        targets:
+        - AutoScalingGroup
+        - ECSInstance
+        - RDSInstance
+        - ELB
+        - ELBv2
+        - ELBv2TargetGroup          

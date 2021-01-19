@@ -3,3 +3,4 @@
 .terraform
 *.iml
 .history
+code/terraform/07-testing-terraform-code/examples/alb/.terraform.tfstate.lock.info
