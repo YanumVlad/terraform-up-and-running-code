@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestGoIsWorking(t *testing.T)  {
+func TestGoIsWorking_old(t *testing.T)  {
 	fmt.Println()
 	fmt.Println("If you see this text, it's working!")
 	fmt.Println()

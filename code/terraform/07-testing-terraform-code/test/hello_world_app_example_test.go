@@ -43,6 +43,7 @@ func TestHelloWorldAppExample(t *testing.T)  {
 	http_helper.HttpGetWithRetryWithCustomValidation(
 		t,
 		url,
+		nil,
 		maxRetries,
 		timeBetweenRetries,
 		func(status int, body string) bool {

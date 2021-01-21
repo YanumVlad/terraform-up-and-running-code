@@ -50,7 +50,4 @@ func TestAlbExample(t *testing.T)  {
 		maxRetries,
 		timeBetweenRetries,
 	)
-
-
-
 }

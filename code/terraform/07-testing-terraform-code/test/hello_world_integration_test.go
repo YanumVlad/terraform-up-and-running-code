@@ -92,6 +92,7 @@ func validateHelloApp(t *testing.T, helloOpts *terraform.Options) {
 	http_helper.HttpGetWithRetryWithCustomValidation(
 		t,
 		url,
+		nil,
 		maxRetries,
 		timeBetweenRetries,
 		func(status int, body string) bool {
@@ -185,6 +186,7 @@ func redeployApp(t *testing.T, helloAppDir string) {
 	http_helper.HttpGetWithRetryWithCustomValidation(
 		t,
 		url,
+		nil,
 		maxRetries,
 		timeBetweenRetries,
 		func(status int, body string) bool {
