@@ -53,7 +53,7 @@ func validateHelloApp(t *testing.T, helloOpts *terraform.Options) {
 }
 
 func createDbOpts(t *testing.T, terraformDir string) *terraform.Options {
-	uniqueId := random.UniqueId()
+	uniqueId := strings.ToLower(random.UniqueId())
 
 	bucketForTesting := "ulny-s3"
 	bucketRegionForTesting := "us-east-2"
@@ -65,6 +65,8 @@ func createDbOpts(t *testing.T, terraformDir string) *terraform.Options {
 		Vars: map[string]interface{}{
 			"db_name": fmt.Sprintf("test%s", uniqueId),
 			"db_password": "password",
+			"cluster_name": fmt.Sprintf("test%s", uniqueId),
+
 		},
 
 		BackendConfig: map[string]interface{}{
@@ -76,9 +78,7 @@ func createDbOpts(t *testing.T, terraformDir string) *terraform.Options {
 	}
 }
 
-func createHelloOpts(
-	dbOpts *terraform.Options,
-	terraformDir string) *terraform.Options {
+func createHelloOpts(dbOpts *terraform.Options, terraformDir string) *terraform.Options {
 
 	return &terraform.Options{
 		TerraformDir: terraformDir,
