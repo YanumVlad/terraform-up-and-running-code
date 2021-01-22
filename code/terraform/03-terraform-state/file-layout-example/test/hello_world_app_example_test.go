@@ -25,8 +25,9 @@ func TestAlbExample(t *testing.T)  {
 	albDnsName := terraform.OutputRequired(t, opts, "alb_dns_name")
 	url := fmt.Sprintf("http://%s", albDnsName)
 
-	expectedStatus := 404
-	expectedBody := "404: page not found"	
+	expectedStatus := 200
+	expectedBody := "Hello, World"
+
 	maxRetries := 10
 	timeBetweenRetries := 10 * time.Second
 
