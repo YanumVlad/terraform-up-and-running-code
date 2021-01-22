@@ -8,11 +8,18 @@ import (
 	"time"
 )
 
-func TestAlbExample(t *testing.T)  {
+func TestHelloWorldAppExample(t *testing.T)  {
 	opts := &terraform.Options{
-		// You should update this relative path to point at your alb
-		// example directory!
+		// You should update this relative path to point at your
+		// hello-world-app example directory!
 		TerraformDir: "../examples/hello-world-app/standalone",
+
+		Vars: map[string]interface{}{
+			"mysql_config": map[string]interface{}{
+				"address": "mock-value-for-test",
+				"port": 3306,
+			},
+		},
 	}
 
 	// Clean up everything at the end of the test
@@ -40,5 +47,4 @@ func TestAlbExample(t *testing.T)  {
 		maxRetries,
 		timeBetweenRetries,
 	)
-
 }
