@@ -8,9 +8,8 @@ provider "aws" {
 module "hello_world_app" {
   source = "../../../modules/services/hello-world-app"
 
-  server_text = "Hello, World"
-  environment = "example"
-
+  server_text  = "Hello, World"
+  environment  = var.environment
   mysql_config = var.mysql_config
 
   instance_type      = "t2.micro"

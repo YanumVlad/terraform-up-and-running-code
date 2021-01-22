@@ -3,6 +3,7 @@ package test
 import (
 	"github.com/gruntwork-io/terratest/modules/http-helper"
 	"github.com/gruntwork-io/terratest/modules/terraform"
+	"github.com/gruntwork-io/terratest/modules/random"
 	"testing"
 	"fmt"
 	"time"
@@ -10,6 +11,9 @@ import (
 )
 
 func TestHelloWorldAppExample(t *testing.T)  {
+
+	t.Parallel()
+
 	opts := &terraform.Options{
 		// You should update this relative path to point at your
 		// hello-world-app example directory!
@@ -20,6 +24,7 @@ func TestHelloWorldAppExample(t *testing.T)  {
 				"address": "mock-value-for-test",
 				"port": 3306,
 			},
+			"environment": fmt.Sprintf("test-%s", random.UniqueId()),
 		},
 	}
 
