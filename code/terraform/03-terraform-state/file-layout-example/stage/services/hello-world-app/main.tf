@@ -1,3 +1,11 @@
+terraform {
+
+  required_version = ">= 0.12, <= 0.13"
+
+  backend "s3" {
+  }
+}
+
 provider "aws" {
   region = "us-east-2"
 
@@ -6,12 +14,13 @@ provider "aws" {
 }
 
 module "hello_world_app" {
-  source = "github.com/YanumVlad/terraform-modules.git//modules/services/hello-world-app?ref=v0.0.7"
+  #source = "github.com/YanumVlad/terraform-modules.git//modules/services/hello-world-app?ref=v0.0.7"
+  source = "../../../modules/services/hello-world-app"
 
   server_text            = "New server text"
-  environment            = "stage"
-  db_remote_state_bucket = "ulny-s3"
-  db_remote_state_key    = "stage/data-stores/mysql/terraform.tfstate"
+  environment            = var.environment
+  db_remote_state_bucket = var.db_remote_state_bucket
+  db_remote_state_key    = var.db_remote_state_key
   enable_autoscaling     = true
 
   instance_type = "t2.micro"

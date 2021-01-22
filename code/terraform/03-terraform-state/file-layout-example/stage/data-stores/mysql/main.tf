@@ -3,12 +3,12 @@ terraform {
   required_version = ">= 0.12, <= 0.13"
 
   backend "s3" {
-    bucket = "ulny-s3"
-    key    = "stage/data-stores/mysql/terraform.tfstate"
-    region = "us-east-2"
-
+    bucket         = "ulny-s3"
+    key            = "stage/data-stores/mysql/terraform.tfstate"
+    region         = "us-east-2"
     dynamodb_table = "dynamo-lock-table"
     encrypt        = true
+
   }
 }
 provider "aws" {
