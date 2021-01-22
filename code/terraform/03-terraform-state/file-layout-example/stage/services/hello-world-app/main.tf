@@ -17,7 +17,7 @@ module "hello_world_app" {
   #source = "github.com/YanumVlad/terraform-modules.git//modules/services/hello-world-app?ref=v0.0.7"
   source = "../../../modules/services/hello-world-app"
 
-  server_text            = "Hello, world"
+  server_text            = var.server_text
   environment            = var.environment
   db_remote_state_bucket = var.db_remote_state_bucket
   db_remote_state_key    = var.db_remote_state_key

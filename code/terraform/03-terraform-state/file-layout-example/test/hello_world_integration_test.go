@@ -109,6 +109,50 @@ func TestHelloWorldAppStageWithStages(t *testing.T) {
 
 	// Validate the hello-world-app works
 	stage(t, "validate_app", func() { validateApp(t, appDirStage) })
+
+	// Redeploy the hello-world-app
+	stage(t, "redeploy_app", func() { redeployApp(t, appDirStage) })
+	
+}
+
+func redeployApp(t *testing.T, helloAppDir string) {
+	helloOpts := test_structure.LoadTerraformOptions(t, helloAppDir)
+
+	albDnsName := terraform.OutputRequired(t, helloOpts, "alb_dns_name")
+	url := fmt.Sprintf("http://%s", albDnsName)
+
+	// Start checking every 1s that the app is responding with a 200 OK
+	stopChecking := make(chan bool, 1)
+	waitGroup, _ := http_helper.ContinuouslyCheckUrl(
+		t,
+		url,
+		stopChecking,
+		1*time.Second,
+	)
+
+	// Update the server text and redeploy
+	newServerText := "Hello, world, v2!"
+	helloOpts.Vars["server_text"] = newServerText
+	terraform.Apply(t, helloOpts)
+
+	// Make sure the new version deployed
+	maxRetries := 10
+	timeBetweenRetries := 10 * time.Second
+	http_helper.HttpGetWithRetryWithCustomValidation(
+		t,
+		url,
+		nil,
+		maxRetries,
+		timeBetweenRetries,
+		func(status int, body string) bool {
+			return status == 200 &&
+				strings.Contains(body, newServerText)
+		},
+	)
+
+	// Stop checking
+	stopChecking <- true
+	waitGroup.Wait()
 }
 
 func deployDb(t *testing.T, dbDir string) {
