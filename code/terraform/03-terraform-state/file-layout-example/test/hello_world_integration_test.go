@@ -48,7 +48,7 @@ func validateHelloApp(t *testing.T, helloOpts *terraform.Options) {
 		timeBetweenRetries,
 		func(status int, body string) bool {
 			return status == 200 &&
-				strings.Contains(body, "Hello, World")
+				strings.Contains(body, "Hello, world")
 		},
 	)
 }
