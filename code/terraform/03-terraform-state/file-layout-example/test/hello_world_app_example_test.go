@@ -6,6 +6,7 @@ import (
 	"testing"
 	"fmt"
 	"time"
+	"strings"
 )
 
 func TestHelloWorldAppExample(t *testing.T)  {
@@ -38,13 +39,18 @@ func TestHelloWorldAppExample(t *testing.T)  {
 	maxRetries := 10
 	timeBetweenRetries := 10 * time.Second
 
-	http_helper.HttpGetWithRetry(
-		t,
+	customValidation := func(statusCode int, response string) bool {
+		return statusCode == expectedStatus && strings.Contains(response, expectedBody)
+	}
+
+
+	//http_helper.HttpGetWithRetry(
+	http_helper.HttpGetWithRetryWithCustomValidation(
+		t, 
 		url,
 		nil,
-		expectedStatus,
-		expectedBody,
 		maxRetries,
 		timeBetweenRetries,
+		customValidation,
 	)
 }
